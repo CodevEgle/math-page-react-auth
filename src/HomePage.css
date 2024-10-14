@@ -1,0 +1,128 @@
+/* Pridedame „Google Fonts“ šriftą */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap'); /* Žaismingas šriftas matieka.lt */
+
+/* Bendra konteinerio struktūra */
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #d8e3e7, #f1f5f9); /* Švelnus melsvai pilkas gradientas */
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Header su baneriu centre */
+.homepage-header {
+  display: flex;
+  justify-content: center; /* Centruoja horizontaliai */
+  align-items: center;      /* Centruoja vertikaliai */
+  height: 30vh;
+  background: linear-gradient(to bottom, #d8e3e7, rgba(255, 255, 255, 0)); /* Gradientas atitinka body */
+  position: relative;
+}
+
+.banner-container {
+  max-width: 50%; /* Baneris užima iki 50% pločio */
+  text-align: center; /* Centruoja tekstą */
+}
+
+.banner {
+  background: #5a9aad; /* Tamsiai melsva/pilka spalva baneriui */
+  border-radius: 30px; /* Suapvalintas stačiakampis */
+  padding: 30px 40px; /* Vidinis tarpas užtikrina vietos tarp teksto ir kraštų */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centruoja tekstą vertikaliai */
+  align-items: center; /* Centruoja tekstą horizontaliai */
+  color: white;
+}
+
+.main-title {
+  font-size: 2.5em;
+  font-weight: 600;
+  font-family: 'Chewy', sans-serif; /* Žaismingas šriftas */
+  color: #ffd700; /* Auksinė geltona, kad išsiskirtų */
+  margin: 0; /* Užtikriname, kad nebus papildomo tarpo viršuje ir apačioje */
+}
+
+.sub-title {
+  font-size: 1.2em;
+  font-weight: 300;
+  margin-top: 10px;
+  color: #f0f0f0; /* Švelniai balta spalva */
+}
+
+/* Pagrindinis turinys */
+.homepage-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* Apie mygtukas su išskirtiniu dizainu */
+.about-button {
+  padding: 15px 40px;
+  font-size: 1.4em;
+  font-weight: 600;
+  background: linear-gradient(135deg, #6cc1bb, #4fa6a2); /* Žalsvas gradientas, išsiskiria, bet derasi */
+  border: none;
+  border-radius: 40px; /* Didesnis užapvalinimas */
+  color: white;
+  cursor: pointer;
+  margin-bottom: 30px; /* Didesnis tarpas */
+  transition: all 0.3s ease;
+}
+
+.about-button:hover {
+  background: linear-gradient(135deg, #4fa6a2, #3b8b87); /* Tamsesnis žalsvas hover efektas */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(72, 207, 173, 0.3);
+}
+
+/* Apie išsiskleidžiantis turinys */
+.about-content {
+  background: rgba(245, 245, 245, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+/* Prisijungimo mygtukai */
+.auth-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.signin-button, .signup-button {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  font-weight: 600;
+  background: linear-gradient(135deg, #7baed4, #4b8bba); /* Mėlynai pilkas gradientas prisijungimo mygtukams */
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signin-button:hover, .signup-button:hover {
+  background: linear-gradient(135deg, #4b8bba, #3b6e92); /* Tamsesnis mėlynai pilkas hover efektas */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(91, 134, 194, 0.3);
+}
+
+/* Footer stilius */
+.homepage-footer {
+  text-align: center;
+  padding: 20px;
+  background: #4b8bba; /* Tamsiai mėlyna spalva */
+  color: white;
+  font-size: 1em;
+  margin-top: auto;
+}

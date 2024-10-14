@@ -1,0 +1,158 @@
+/* Išorinis puslapio fonas (melsvas atspalvis) */
+.years-page-wrapper {
+  background-color: #e0f7fa; /* Šviesiai melsvas fonas */
+  padding: 40px 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Viršutiniai mygtukai (atgal į pradžią ir vartotojo info) */
+.header-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+/* Mygtukas atgal į pradžią (pašaliname pabraukimą) */
+.back-home-button {
+  text-decoration: none; /* Pašaliname pabraukimą */
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #61dafb, #21a1f1); /* Mėlynas gradientas */
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-home-button:hover {
+  background: linear-gradient(135deg, #21a1f1, #61dafb); /* Hover efektas */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(33, 161, 241, 0.3);
+}
+
+.user-info-button {
+  padding: 10px 20px;
+  background: #d3d3d3;
+  color: #999999;
+  font-size: 1.1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: not-allowed;
+}
+
+/* Konteineris, kuriame yra antraštė ir mygtukai (šviesus laukelis) */
+.years-container {
+  background-color: #ffffff; /* Šviesus fonas */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Šešėlis */
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
+
+/* Pagrindinis turinys (antraštė ir aprašymas) */
+.years-title {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.years-description {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+/* Sąrašas metų mygtukų, išdėstyti dvejose eilutėse po 4 mygtukus */
+.years-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Keturios kolonos */
+  gap: 20px; /* Tarpas tarp mygtukų */
+  list-style: none;
+  padding: 0;
+}
+
+.year-item {
+  margin-bottom: 20px;
+}
+
+/* Year mygtukai */
+.year-button {
+  padding: 15px 40px;
+  font-size: 1.2em;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Aktyvūs Year mygtukai */
+.year-button.active {
+  background: linear-gradient(135deg, #61dafb, #21a1f1);
+  color: white;
+}
+
+.year-button.active:hover {
+  background: linear-gradient(135deg, #21a1f1, #61dafb);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(33, 161, 241, 0.3);
+}
+
+/* Neaktyvūs Year mygtukai */
+.year-button.inactive {
+  background: #d3d3d3;
+  color: #999999;
+  cursor: not-allowed;
+}
+
+.year-button.inactive:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Topics mygtukas */
+.topics-button {
+  padding: 10px 20px;
+  font-size: 1.1em;
+  font-weight: 600;
+  background: linear-gradient(135deg, #61dafb, #21a1f1);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.topics-button:hover {
+  background: linear-gradient(135deg, #21a1f1, #61dafb);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(33, 161, 241, 0.3);
+}
+
+/* Pradėti mygtukas */
+.start-button {
+  padding: 8px 16px;
+  font-size: 1em;
+  font-weight: 500;
+  background: linear-gradient(135deg, #ffafbd, #ffc3a0); /* Kitoks gradientas */
+  border: none;
+  border-radius: 15px;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.start-button:hover {
+  background: linear-gradient(135deg, #ffc3a0, #ffafbd);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(255, 165, 190, 0.3);
+}
