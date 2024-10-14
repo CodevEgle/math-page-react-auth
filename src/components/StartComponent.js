@@ -6,10 +6,11 @@ import BoardModerator from "./BoardModerator";
 import BoardUser from "./BoardUser";
 import ProfileComponent from "./ProfileComponent";  // Import ProfileComponent
 import YearsPage from "./YearsPage";  // Import YearsPage
+import '../StartComponent.css';  // Import the scoped CSS
 
 const StartComponent = () => {
-  const [showModeratorBoardButton, setShowModeratorBoardButton] = useState(false); // Controls display of the moderator board button
-  const [showAdminBoardButton, setShowAdminBoardButton] = useState(false); // Controls display of the admin board button
+  const [showModeratorBoardButton, setShowModeratorBoardButton] = useState(true); // Show Moderator button for testing
+  const [showAdminBoardButton, setShowAdminBoardButton] = useState(true); // Show Admin button for testing
   const [currentBoard, setCurrentBoard] = useState("user"); // Tracks the current board being displayed ("user", "admin", "moderator", or "profile")
   const [currentUser, setCurrentUser] = useState(undefined); // Stores the current user data
   const navigate = useNavigate();
@@ -17,9 +18,10 @@ const StartComponent = () => {
   useEffect(() => {
     const user = AuthService.getCurrentUser();
     if (user && user.roles) {
+      console.log('User roles:', user.roles);  // Log the user roles for debugging
       setCurrentUser(user);
-      setShowAdminBoardButton(user.roles.includes("ROLE_ADMIN"));
-      setShowModeratorBoardButton(user.roles.includes("ROLE_MODERATOR"));
+      setShowAdminBoardButton(user.roles.includes("ROLE_ADMIN")); // Set the admin button visibility
+      setShowModeratorBoardButton(user.roles.includes("ROLE_MODERATOR")); // Set the moderator button visibility
     }
   }, []);
 
@@ -46,14 +48,14 @@ const StartComponent = () => {
 
   return (
     <div>
-      {/* Navbar with Home, Admin, Moderator, Profile, and Logout buttons */}
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <div className="navbar-nav mr-auto">
-          <Link to={"/"} className="navbar-brand">Home</Link>
+      {/* StartComponent header styled similarly to homepage */}
+      <header className="start-header">  {/* Apply the .start-header class */}
+        <Link to={"/"} className="start-navbar-brand">Home</Link>
 
+        <div className="start-navbar-nav">
           {showAdminBoardButton && (
             <li className="nav-item">
-              <button className="btn btn-link nav-link" onClick={handleAdminBoardClick}>
+              <button className="btn-link" onClick={handleAdminBoardClick}>
                 Admin Board
               </button>
             </li>
@@ -61,35 +63,31 @@ const StartComponent = () => {
 
           {showModeratorBoardButton && (
             <li className="nav-item">
-              <button className="btn btn-link nav-link" onClick={handleModeratorBoardClick}>
+              <button className="btn-link" onClick={handleModeratorBoardClick}>
                 Moderator Board
               </button>
             </li>
           )}
-        </div>
-
-        <div className="navbar-nav ml-auto">
           <li className="nav-item">
-            <button className="btn btn-link nav-link" onClick={handleProfileClick}>
+            <button className="btn-link" onClick={handleProfileClick}>
               Vartotojo Informacija
             </button>
           </li>
           <li className="nav-item">
-            <button className="btn btn-link nav-link" onClick={logOut}>
+            <button className="btn-link" onClick={logOut}>
               Atsijungti
             </button>
           </li>
         </div>
-      </nav>
+      </header>
 
       {/* Render the selected board or profile */}
-      <div className="container mt-3">
+      <div className="start-container">
         {currentBoard === "profile" && <ProfileComponent />}  {/* Show profile if "Vartotojo Informacija" is clicked */}
         {currentBoard === "admin" && <BoardAdmin />}  {/* Show admin board if "Admin Board" is clicked */}
         {currentBoard === "moderator" && <BoardModerator />}  {/* Show moderator board if "Moderator Board" is clicked */}
         {currentBoard === "user" && (
           <>
-            <BoardUser />  {/* Show user board by default or if "User Board" is clicked */}
             <YearsPage />  {/* Show years page after the user board */}
           </>
         )}

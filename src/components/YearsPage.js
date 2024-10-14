@@ -13,7 +13,10 @@ function YearsPage() {
   useEffect(() => {
     // Fetch years using the YearsService (Axios)
     YearsService.getYears()
-      .then((response) => setYears(response.data))
+      .then((response) => {
+        setYears(response.data);
+        console.log("Fetched years data:", response.data);  // Log the fetched data for debugging
+      })
       .catch((error) => console.error('Error fetching years:', error));
   }, []);
 
