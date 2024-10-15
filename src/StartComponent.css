@@ -1,60 +1,78 @@
-/* StartComponent header style */
+/* StartComponent header style, similar to homepage header */
 .start-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-    padding: 0 30px;
-    background: #5a9aad;
-    border-radius: 30px;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    position: relative;
-    z-index: 1000;
-  }
-  
-  /* Navbar brand aligned to the left */
-  .start-navbar-brand {
-    font-size: 1.8em;
-    font-weight: 600;
-    color: white;
-    text-decoration: none;
-  }
-  
-  /* Navbar content for right-aligned buttons */
-  .start-navbar-nav {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-left: auto;
-  }
-  
-  /* Buttons inside the header */
-  .start-navbar-nav .nav-item {
-    display: inline-block;
-  }
-  
-  .start-navbar-nav .nav-item .btn-link {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    font-weight: 600;
-    background: linear-gradient(135deg, #7baed4, #4b8bba);
-    border: none;
-    border-radius: 30px;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .start-navbar-nav .nav-item .btn-link:hover {
-    background: linear-gradient(135deg, #4b8bba, #3b6e92);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(91, 134, 194, 0.3);
-  }
-  
-  /* Ensure content is rendered below the header */
-  .start-container {
-    margin-top: 100px; /* Add margin to push content below the header */
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 30px;
+  background: #5a9aad;
+  border-radius: 30px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+/* Navbar brand (Home link) aligned to the left */
+.start-navbar-brand {
+  font-size: 1.8em;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+}
+
+/* Button container for right-aligned buttons */
+.start-navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between buttons */
+  list-style-type: none; /* Remove list styling */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+}
+
+/* General button style for right-aligned buttons */
+.start-navbar-nav .nav-item {
+  list-style: none;
+}
+
+/* Styling for each button (Admin, Moderator, Profile, Logout) */
+.start-navbar-nav .btn-link {
+  background: linear-gradient(135deg, #7baed4, #4b8bba);
+  padding: 10px 20px;
+  font-size: 1.2em;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.start-navbar-nav .btn-link:hover {
+  background: linear-gradient(135deg, #4b8bba, #3b6e92);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(91, 134, 194, 0.3);
+}
+
+/* Ensure the back button ("Atgal į mokslus") matches other buttons */
+.start-back-button {
+  margin-left: 20px;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  font-weight: 600;
+  background: linear-gradient(135deg, #7baed4, #4b8bba);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.start-back-button:hover {
+  background: linear-gradient(135deg, #4b8bba, #3b6e92);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(91, 134, 194, 0.3);
+}

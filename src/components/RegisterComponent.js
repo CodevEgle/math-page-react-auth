@@ -1,10 +1,11 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate, Link } from "react-router-dom";
 import { isEmail } from "validator";
 import AuthService from "../services/AuthService";
+import "../LoginComponent.css"; // Reuse the same CSS file for consistency
 
 const Register = () => {
-  let navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
   const form = useRef();
 
   const [username, setUsername] = useState("");
@@ -23,54 +24,61 @@ const Register = () => {
     setSuccessful(false);
 
     if (!username || username.length < 3 || username.length > 20) {
-      setMessage("Username must be between 3 and 20 characters.");
+      setMessage("Vartotojo vardas turi būti nuo 3 iki 20 simbolių.");
       return;
     }
 
     if (!isEmail(email)) {
-      setMessage("Invalid email format.");
+      setMessage("Netinkamas el. pašto formatas.");
       return;
     }
 
     if (!password || password.length < 6 || password.length > 40) {
-      setMessage("Password must be between 6 and 40 characters.");
+      setMessage("Slaptažodis turi būti nuo 6 iki 40 simbolių.");
       return;
     }
 
-    AuthService.register(username, email, password)
-      .then(
-        (response) => {
-          setMessage(response.data.message);
-          setSuccessful(true);
-          navigate("/start"); // Redirect to the StartComponent after sign-up
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-          setMessage(resMessage);
-          setSuccessful(false);
-        }
-      );
+    AuthService.register(username, email, password).then(
+      (response) => {
+        setMessage(response.data.message);
+        setSuccessful(true);
+        navigate("/login"); // Redirect to StartComponent after registration
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        setMessage(resMessage);
+        setSuccessful(false);
+      }
+    );
   };
 
   return (
-    <div className="col-md-12">
-      <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
+    <div className="register-page">
+      {/* Banner with a button to go back to Home and "Prisijungti" */}
+      <div className="register-banner">
+        <Link to="/" className="back-to-home-button">
+          Grįžti į pradžią
+        </Link>
+        <Link to="/login" className="btn-link-right">
+          Prisijungti
+        </Link>
+      </div>
 
+      {/* Title for the register page */}
+      <h2 className="register-title">Užsiregistruokite ir mokykitės</h2>
+
+      {/* Register form */}
+      <div className="register-container">
         <form onSubmit={handleRegister} ref={form}>
           {!successful && (
             <div>
               <div className="form-group">
-                <label htmlFor="username">Username</label>
+                <label>Vartotojo vardas</label>
                 <input
                   type="text"
                   className="form-control"
@@ -82,7 +90,7 @@ const Register = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label>El. paštas</label>
                 <input
                   type="text"
                   className="form-control"
@@ -94,7 +102,7 @@ const Register = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label>Slaptažodis</label>
                 <input
                   type="password"
                   className="form-control"
@@ -107,7 +115,7 @@ const Register = () => {
 
               <div className="form-group">
                 <button className="btn btn-primary btn-block" type="submit">
-                  Sign Up
+                  Registruotis
                 </button>
               </div>
             </div>

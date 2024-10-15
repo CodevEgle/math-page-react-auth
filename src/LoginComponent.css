@@ -1,0 +1,130 @@
+/* Ensure the body has no extra margins or padding */
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style for the whole page */
+  .login-page, .register-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f5f5f5;
+    padding: 20px;
+  }
+  
+  /* Banner styling */
+  .login-banner, .register-banner {
+    width: 100%;
+    background: #5a9aad; /* Same background color as in StartComponent */
+    padding: 10px 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start; /* Align the button to the left */
+    position: fixed; /* Ensure the banner is at the very top */
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .back-to-home-button {
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+    background: linear-gradient(135deg, #7baed4, #4b8bba);
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+  }
+  
+  .back-to-home-button:hover {
+    background: linear-gradient(135deg, #4b8bba, #3b6e92);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(91, 134, 194, 0.3);
+  }
+  
+  /* Title for the login and register pages */
+  .login-title, .register-title {
+    font-size: 2em;
+    font-weight: 600;
+    color: #333;
+    margin: 100px 0 30px 0; /* Adds spacing between the banner and the form */
+    text-align: center;
+  }
+  
+  /* Container for the login and register form */
+  .login-container, .register-container {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 40%; /* Takes 40% of the page width */
+    max-width: 500px;
+    min-width: 300px;
+  }
+  
+  /* Form fields */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1.1em;
+  }
+  
+  /* Submit button */
+  .btn-primary {
+    width: 100%;
+    background-color: #4b8bba;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  
+  .btn-primary:disabled {
+    background-color: #8bb0ce;
+  }
+  
+  .btn-primary:hover {
+    background-color: #3b6e92;
+  }
+  
+  .alert {
+    margin-top: 20px;
+  }
+
+  .login-banner, .register-banner {
+    width: 100%;
+    background: #5a9aad;
+    padding: 10px 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between; /* Space between elements in banner */
+    align-items: center; /* Vertically align the items */
+  }
+  
+  /* Right aligned button */
+  .btn-link-right {
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+    background: linear-gradient(135deg, #7baed4, #4b8bba);
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-link-right:hover {
+    background: linear-gradient(135deg, #4b8bba, #3b6e92);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(91, 134, 194, 0.3);
+  }
