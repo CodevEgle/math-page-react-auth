@@ -1,46 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import TopicsPage from './TopicsPage';
 import YearsService from '../services/YearsService';  // Import YearsService for API calls
 import '../YearsPage.css';
 
-function YearsPage() {
-  const [expandedYear, setExpandedYear] = useState(null); // Manage expanded year details
-  const [years, setYears] = useState([]); // Store years data
-  const [topicsToShow, setTopicsToShow] = useState(null); // Manage topics visibility
-  const navigate = useNavigate(); // For navigation
+function YearsPage({ onYearSelect }) {
+  const [expandedYear, setExpandedYear] = useState(null);
+  const [years, setYears] = useState([]);
+  const [topicsToShow, setTopicsToShow] = useState(null);
 
   useEffect(() => {
-    // Fetch years using the YearsService (Axios)
+    // Fetch years from the API using YearsService
     YearsService.getYears()
       .then((response) => {
         setYears(response.data);
-        console.log("Fetched years data:", response.data);  // Log the fetched data for debugging
+        console.log("Fetched years data:", response.data);
       })
       .catch((error) => console.error('Error fetching years:', error));
   }, []);
 
   const toggleYearDetails = (year) => {
-    // Toggle the visibility of year details
     setExpandedYear(expandedYear === year ? null : year);
-    setTopicsToShow(null); // Hide topics when switching between years
+    setTopicsToShow(null);
   };
 
   const handleShowTopics = (topics) => {
-    // Toggle the visibility of topics
     setTopicsToShow(topicsToShow ? null : topics);
   };
 
+  // Instead of navigating, pass the selected year and topics to StartComponent
   const handleStart = (year) => {
-    // Navigate to the YearTopicPage with the year's topics
-    navigate(`/year/${year.name.replace(" klasė", "klase")}`, { state: { topics: year.topics } });
+    onYearSelect(year.name, year.topics);  // Pass year name and topics to StartComponent
   };
 
   return (
     <div className="years-page-wrapper">
       <div className="header-buttons">
         <Link to="/" className="back-home-button">Atgal į pradžią</Link>
-        {/* Removed the "Vartotojo Informacija" button */}
       </div>
 
       <div className="years-container">
@@ -59,7 +55,6 @@ function YearsPage() {
                 {year.name}
               </button>
 
-              {/* Show year details if the year is expanded */}
               {expandedYear === year && (
                 <div className="year-details">
                   <p>{year.description}</p>
@@ -70,10 +65,10 @@ function YearsPage() {
                     {topicsToShow ? "Slėpti temas" : "Rodyti temas"}
                   </button>
 
-                  {/* Start button to select the year */}
-                  <button className="start-button" onClick={() => handleStart(year)}>Rinktis šią klasę</button>
+                  <button className="start-button" onClick={() => handleStart(year)}>
+                    Rinktis šią klasę
+                  </button>
 
-                  {/* Show topics if topicsToShow is not null */}
                   {topicsToShow && <TopicsPage topics={topicsToShow} />}
                 </div>
               )}

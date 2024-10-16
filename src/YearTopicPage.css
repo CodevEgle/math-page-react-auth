@@ -1,0 +1,204 @@
+/* Išorinis puslapio fonas */
+.years-page-wrapper {
+  background-color: #e0f7fa;
+  padding: 40px 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Viršutiniai mygtukai */
+.header-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+/* Kairėje pusėje esantys mygtukai ("Atgal" ir "Atgal į pradžią") */
+.left-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+/* Mygtukas "Atgal" */
+.back-button {
+  text-decoration: none;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #b2ebf2, #00bcd4);
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: linear-gradient(135deg, #00bcd4, #b2ebf2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 188, 212, 0.3);
+}
+
+/* Mygtukas "Atgal į pradžią" */
+.back-home-button {
+  text-decoration: none;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #0288d1, #0277bd);
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-home-button:hover {
+  background: linear-gradient(135deg, #0277bd, #0288d1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(2, 136, 209, 0.3);
+}
+
+/* Mygtukas "Vartotojo informacija" */
+.user-info-button {
+  padding: 10px 20px;
+  background: #d3d3d3;
+  color: #999999;
+  font-size: 1.1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: not-allowed;
+}
+
+/* Topics ir subtopics konteineris */
+.topics-content-wrapper {
+  display: flex;
+  justify-content: space-between; /* Lentelė dešinėje pusėje */
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Topics stulpelis (kairėje) */
+.topics-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 40%; /* Topics užims 40% pločio */
+}
+
+/* Topics sąrašas */
+.topics-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Topics elementas */
+.topic-item {
+  display: flex;
+  justify-content: center;
+}
+
+/* Aktyvūs Topics mygtukai */
+.topic-button.active {
+  padding: 15px 20px;
+  font-size: 1.1em;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #61dafb, #21a1f1);
+  color: white;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: auto;
+  max-width: 100%;
+  min-width: 200px;
+}
+
+.topic-button.active:hover {
+  background: linear-gradient(135deg, #21a1f1, #61dafb);
+  transform: scale(1.1);
+  box-shadow: 0 8px 15px rgba(33, 161, 241, 0.3);
+}
+
+/* Neaktyvūs Topics mygtukai */
+.topic-button.inactive {
+  background: #d3d3d3;
+  color: #999999;
+  cursor: not-allowed;
+  padding: 15px 20px;
+  border-radius: 30px;
+  font-size: 1.1em;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: auto;
+  max-width: 100%;
+  min-width: 200px;
+}
+
+.topic-button.inactive:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Lentelė su subtopics (dešinėje) */
+.topic-details {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  width: 50%; /* Lentelė užims 50% pločio dešinėje */
+}
+
+/* Subtopics sąrašas */
+.subtopics-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+/* Subtopic elementai */
+.subtopic-item {
+  background: #e3f2fd;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+/* Pradėti mokytis mygtukas */
+.learn-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 60px; /* Dvigubai padidintas mygtukas */
+  font-size: 1.4em; /* Didesnis šriftas */
+  font-weight: bold;
+  background: linear-gradient(135deg, #ff5722, #e64a19);
+  color: white;
+  border: none;
+  border-radius: 50px 0 0 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: auto; /* Dešiniau subtopics */
+}
+
+.learn-button:hover {
+  background: linear-gradient(135deg, #e64a19, #ff5722);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(255, 87, 34, 0.3);
+}

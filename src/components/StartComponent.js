@@ -3,8 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthService from "../services/AuthService";
 import BoardAdmin from "./BoardAdmin";
 import BoardModerator from "./BoardModerator";
-import ProfileComponent from "./ProfileComponent";
-import YearsPage from "./YearsPage";
+import ProfileComponent from "./ProfileComponent";  // Import ProfileComponent
+import YearsPage from "../learn-components/YearsPage";  // Import YearsPage
+import YearTopicPage from "../learn-components/YearTopicPage";  // Import YearsTopicPage for selected year
 import '../StartComponent.css';  // Import the scoped CSS
 
 const StartComponent = () => {
@@ -12,11 +13,14 @@ const StartComponent = () => {
   const [showAdminBoardButton, setShowAdminBoardButton] = useState(false);
   const [currentBoard, setCurrentBoard] = useState("user");
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [selectedYear, setSelectedYear] = useState(null);  // New state to track the selected year
+  const [selectedTopics, setSelectedTopics] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
     if (user && user.roles) {
+      console.log('User roles:', user.roles);
       setCurrentUser(user);
       setShowAdminBoardButton(user.roles.includes("ROLE_ADMIN"));
       setShowModeratorBoardButton(user.roles.includes("ROLE_MODERATOR"));
@@ -44,9 +48,17 @@ const StartComponent = () => {
     setCurrentBoard("user");
   };
 
+  const handleYearSelect = (year, topics) => {
+    setSelectedYear(year);
+    setSelectedTopics(topics); 
+  };
+
+  const handleBackToYears = () => {
+    setSelectedYear(null);  
+  };
+
   return (
     <div>
-      {/* StartComponent header styled similarly to homepage */}
       <header className="start-header">
         <Link to={"/"} className="start-navbar-brand">Į pradžią</Link>
 
@@ -87,14 +99,17 @@ const StartComponent = () => {
         </div>
       </header>
 
-      {/* Render the selected board or profile */}
       <div className="start-container">
         {currentBoard === "profile" && <ProfileComponent />}
         {currentBoard === "admin" && <BoardAdmin />}
         {currentBoard === "moderator" && <BoardModerator />}
         {currentBoard === "user" && (
           <>
-            <YearsPage />
+            {selectedYear ? (
+              <YearTopicPage year={selectedYear} topics={selectedTopics} onBack={handleBackToYears} />
+            ) : (
+              <YearsPage onYearSelect={handleYearSelect} />
+            )}
           </>
         )}
       </div>
