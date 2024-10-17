@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import YearsService from '../services/YearsService';
 import '../YearTopicPage.css';
 
-function YearTopicPage({ year, topics, onBack }) {
+function YearTopicPage({ year, topics, onBack, onLearn }) {
   const [theories, setTheories] = useState({});
   const [selectedTopic, setSelectedTopic] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // Add a log to verify if topics are passed correctly
   useEffect(() => {
     console.log('Received topics:', topics);
 
@@ -15,46 +15,55 @@ function YearTopicPage({ year, topics, onBack }) {
       return;
     }
 
+    // Fetch theories for each topic
     const fetchAllTheories = async () => {
+      setLoading(true);  // Set loading to true while fetching data
       try {
         const theoriesData = {};
         for (const topic of topics) {
-          // Mock fetching subtopics or use your service here
-          const response = await YearsService.getTheories(topic.id);
-          theoriesData[topic.id] = response.data;  // Store the fetched subtopics data
+          const response = await YearsService.getTheories(topic.id);  // Fetch theories for each topic
+          theoriesData[topic.id] = response.data;  // Store the fetched theories data
         }
-        setTheories(theoriesData);  // Set the state with all subtopics
+        setTheories(theoriesData);  // Set the state with all theories
       } catch (error) {
-        console.error("Error fetching subtopics:", error);
+        console.error("Error fetching theories:", error);
+      } finally {
+        setLoading(false);  // Stop loading after the data is fetched
       }
     };
 
     if (topics.length > 0) {
-      fetchAllTheories();  // Fetch subtopics only if topics exist
+      fetchAllTheories();
     }
   }, [topics]);
 
-  // Function to toggle the display of subtopics
+  // Handle topic selection
   const handleTopicClick = (topic) => {
-    if (selectedTopic === topic) {
-      setSelectedTopic(null); // Close the subtopics table if the same topic is clicked again
-    } else {
-      setSelectedTopic(topic); // Show subtopics for the clicked topic
-    }
+    setSelectedTopic(selectedTopic === topic ? null : topic);  // Toggle selected topic
+  };
+
+  // Start learning for the selected topic
+  const handleStart = (selectedTopic) => {
+    onLearn({
+      title: selectedTopic.title,
+      theories: theories[selectedTopic.id] || [],  // Ensure theories are fetched
+      assessment: selectedTopic.assessment || '',  // Pass the assessment if available
+    });
   };
 
   return (
     <div className="years-page-wrapper">
       <div className="header-buttons">
         <button className="back-button" onClick={onBack}>Atgal į klases</button> {/* Call onBack to go back to YearsPage */}
-        <button className="user-info-button">Vartotojo informacija</button>
       </div>
 
       <div className="years-container">
-        <h1 className="years-title">{year}</h1>
+        <h1 className="years-title">{year.name}</h1>  {/* Display year.name */}
         <p className="years-description">Čia galite peržiūrėti ir pasirinkti temas, kurias norite mokytis.</p>
 
-        {(!topics || topics.length === 0) ? (
+        {loading ? (
+          <p className="loading-message">Loading theories...</p>
+        ) : (!topics || topics.length === 0) ? (
           <p className="no-topics-message">Nėra prieinamų temų šioje klasėje.</p>
         ) : (
           <div className="topics-content-wrapper">
@@ -73,7 +82,7 @@ function YearTopicPage({ year, topics, onBack }) {
               </ul>
             </div>
 
-            {/* Subtopics table on the right-hand side */}
+            {/* Theories section */}
             {selectedTopic && (
               <div className="topic-details">
                 <h2>{selectedTopic.title}</h2>
@@ -84,7 +93,7 @@ function YearTopicPage({ year, topics, onBack }) {
                 </ul>
                 <button
                   className="learn-button"
-                  onClick={() => console.log('Pradėti mokytis:', selectedTopic)}
+                  onClick={() => handleStart(selectedTopic)}  // Call handleStart when the button is clicked
                 >
                   Pradėti mokytis
                 </button>

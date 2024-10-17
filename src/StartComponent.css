@@ -1,4 +1,21 @@
 /* StartComponent header style, similar to homepage header */
+.start-container {
+  width: 100%; /* Make sure the container spans full width */
+  max-width: 1200px; /* Optional: Limit max width to avoid overly stretched content */
+  padding: 20px;
+  background-color: #e0f7fa; /* Add a background color */
+  border-radius: 30px; /* Apply rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  box-sizing: border-box; /* Include padding in the element's width and height */
+}
+
+/* Ensure the container is responsive */
+@media (max-width: 768px) {
+  .start-container {
+    padding: 15px;
+    max-width: 90%; 
+  }
+}
 .start-header {
   display: flex;
   justify-content: space-between;

@@ -11,6 +11,7 @@ class YearsService {
   getTheories(topicId) {
     return axios.get(`http://localhost:8080/api/topics/${topicId}/theories`, { headers: authHeader() });
   }
+  
 }
 
 export default new YearsService();

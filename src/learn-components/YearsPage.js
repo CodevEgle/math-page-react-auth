@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import TopicsPage from './TopicsPage';
-import YearsService from '../services/YearsService';  // Import YearsService for API calls
+import YearsService from '../services/YearsService';  
 import '../YearsPage.css';
 
 function YearsPage({ onYearSelect }) {
@@ -10,7 +10,6 @@ function YearsPage({ onYearSelect }) {
   const [topicsToShow, setTopicsToShow] = useState(null);
 
   useEffect(() => {
-    // Fetch years from the API using YearsService
     YearsService.getYears()
       .then((response) => {
         setYears(response.data);
@@ -28,17 +27,13 @@ function YearsPage({ onYearSelect }) {
     setTopicsToShow(topicsToShow ? null : topics);
   };
 
-  // Instead of navigating, pass the selected year and topics to StartComponent
+  // Pass the full year object (not just year.name) to StartComponent
   const handleStart = (year) => {
-    onYearSelect(year.name, year.topics);  // Pass year name and topics to StartComponent
+    onYearSelect(year, year.topics);  // Pass full year object
   };
 
   return (
     <div className="years-page-wrapper">
-      <div className="header-buttons">
-        <Link to="/" className="back-home-button">Atgal į pradžią</Link>
-      </div>
-
       <div className="years-container">
         <h1 className="years-title">Klasės</h1>
         <p className="years-description">Sveiki prisijungę į matematikos svetainę.</p>

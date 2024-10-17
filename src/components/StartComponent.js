@@ -3,24 +3,25 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthService from "../services/AuthService";
 import BoardAdmin from "./BoardAdmin";
 import BoardModerator from "./BoardModerator";
-import ProfileComponent from "./ProfileComponent";  // Import ProfileComponent
-import YearsPage from "../learn-components/YearsPage";  // Import YearsPage
-import YearTopicPage from "../learn-components/YearTopicPage";  // Import YearsTopicPage for selected year
-import '../StartComponent.css';  // Import the scoped CSS
+import ProfileComponent from "./ProfileComponent";
+import YearsPage from "../learn-components/YearsPage";
+import YearTopicPage from "../learn-components/YearTopicPage";
+import LearnComponent from "../learn-components/LearnComponent"; // Import LearnComponent
+import '../StartComponent.css';
 
 const StartComponent = () => {
   const [showModeratorBoardButton, setShowModeratorBoardButton] = useState(false);
   const [showAdminBoardButton, setShowAdminBoardButton] = useState(false);
   const [currentBoard, setCurrentBoard] = useState("user");
   const [currentUser, setCurrentUser] = useState(undefined);
-  const [selectedYear, setSelectedYear] = useState(null);  // New state to track the selected year
-  const [selectedTopics, setSelectedTopics] = useState(null);
+  const [selectedYear, setSelectedYear] = useState(null); // Tracks the selected year
+  const [selectedTopics, setSelectedTopics] = useState(null); // Tracks topics for the selected year
+  const [selectedTopic, setSelectedTopic] = useState(null); // Tracks the selected topic for learning
   const navigate = useNavigate();
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
     if (user && user.roles) {
-      console.log('User roles:', user.roles);
       setCurrentUser(user);
       setShowAdminBoardButton(user.roles.includes("ROLE_ADMIN"));
       setShowModeratorBoardButton(user.roles.includes("ROLE_MODERATOR"));
@@ -49,12 +50,27 @@ const StartComponent = () => {
   };
 
   const handleYearSelect = (year, topics) => {
-    setSelectedYear(year);
-    setSelectedTopics(topics); 
+    setSelectedYear(year); // Set the selected year
+    setSelectedTopics(topics); // Set topics for the selected year
+    setSelectedTopic(null); // Ensure no topic is selected yet
   };
 
-  const handleBackToYears = () => {
-    setSelectedYear(null);  
+  const handleBackToYearsPage = () => {
+    setSelectedYear(null); // Reset year to go back to YearsPage
+    setSelectedTopics(null); // Reset topics when going back
+    setSelectedTopic(null); // Reset topic
+  };
+
+  const handleBackToTopics = () => {
+    setSelectedTopic(null); // Go back to YearTopicPage without resetting the year
+  };
+
+  const handleLearn = (topic) => {
+    setSelectedTopic({
+      ...topic,
+      theories: topic.theories || [], // Ensure theories is an array
+      assessment: topic.assessment || '', // Default to empty string if no assessment
+    });
   };
 
   return (
@@ -105,8 +121,22 @@ const StartComponent = () => {
         {currentBoard === "moderator" && <BoardModerator />}
         {currentBoard === "user" && (
           <>
-            {selectedYear ? (
-              <YearTopicPage year={selectedYear} topics={selectedTopics} onBack={handleBackToYears} />
+            {selectedTopic ? (
+              <LearnComponent
+                topic={selectedTopic}
+                year={selectedYear} // Ensure year is passed
+                onBackToTopics={handleBackToTopics} // Navigate back to YearTopicPage
+                onBackToYears={handleBackToYearsPage} // Navigate back to YearsPage
+              />
+              
+            ) : selectedYear ? (
+              <YearTopicPage
+                year={selectedYear}
+                topics={selectedTopics}
+                onBack={handleBackToYearsPage} // Navigate back to YearsPage
+                onLearn={handleLearn}
+              />
+              
             ) : (
               <YearsPage onYearSelect={handleYearSelect} />
             )}

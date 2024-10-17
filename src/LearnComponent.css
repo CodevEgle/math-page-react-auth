@@ -1,0 +1,104 @@
+
+.learn-component {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    /*border: 1px solid #ccc;*/
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .learn-header {
+    display: flex;
+    justify-content: flex-end;  /* Align topic title to the right */
+    padding: 10px 0;
+  }
+  
+  .learn-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .learn-content {
+    padding: 20px 0;
+  }
+  
+  .learn-footer {
+    text-align: right;
+    margin-top: 20px;
+  }
+  
+  .next-button,
+  .assessment-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .next-button:hover,
+  .assessment-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .learn-back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .learn-back-button:hover {
+    background-color: #e2e6ea;
+  }
+
+  .breadcrumb {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 0.3em; /* Add spacing between items */
+    margin-bottom: 20px;
+  }
+  
+  .breadcrumb-item {
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make breadcrumb items bold */
+    cursor: pointer;
+  }
+  
+  .breadcrumb-item:first-child {
+    color: #4b8bba; /* Custom color for "KLASĖS" */
+  }
+  
+  .breadcrumb-item:nth-child(3) {
+    color: #6cc1bb; /* Custom color for "9 KLASĖ" */
+  }
+  
+  .breadcrumb-current {
+    font-weight: bold;
+    color: #ff7f50; /* Custom color for the current topic */
+  }
+  
+  .breadcrumb span {
+    margin-right: 0.2em; /* Add small spacing between "->" and text */
+  }
+  
+  .breadcrumb span:not(.breadcrumb-current) {
+    transition: color 0.3s ease; /* Smooth transition when hovering */
+  }
+  
+  .breadcrumb-item:hover {
+    color: #f0b37e; /* Hover effect for clickable breadcrumb items */
+  }
+  
