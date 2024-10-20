@@ -11,7 +11,19 @@ class YearsService {
   getTheories(topicId) {
     return axios.get(`http://localhost:8080/api/topics/${topicId}/theories`, { headers: authHeader() });
   }
-  
+
+  getAssessmentQuestions(assessmentId) {
+    return axios.get(`http://localhost:8080/api/assessments/${assessmentId}/questions`, {
+      headers: authHeader(),
+    });
+  }
+  getAssessmentsByTopicId(topicId) {
+    return axios.get(`http://localhost:8080/api/topics/${topicId}/assessments`, { headers: authHeader() });
+  }
+
+  submitGrade(gradeDto) {
+    return axios.post(`http://localhost:8080/api/grades/add`, gradeDto, { headers: authHeader() });
+  }
 }
 
 export default new YearsService();

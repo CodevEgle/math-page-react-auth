@@ -6,7 +6,9 @@ import BoardModerator from "./BoardModerator";
 import ProfileComponent from "./ProfileComponent";
 import YearsPage from "../learn-components/YearsPage";
 import YearTopicPage from "../learn-components/YearTopicPage";
-import LearnComponent from "../learn-components/LearnComponent"; // Import LearnComponent
+import LearnComponent from "../learn-components/LearnComponent";
+import AssessmentComponent from "../learn-components/AssessmentComponent";
+import ErrorBoundary from "../ErrorBoundary";
 import '../StartComponent.css';
 
 const StartComponent = () => {
@@ -14,9 +16,10 @@ const StartComponent = () => {
   const [showAdminBoardButton, setShowAdminBoardButton] = useState(false);
   const [currentBoard, setCurrentBoard] = useState("user");
   const [currentUser, setCurrentUser] = useState(undefined);
-  const [selectedYear, setSelectedYear] = useState(null); // Tracks the selected year
-  const [selectedTopics, setSelectedTopics] = useState(null); // Tracks topics for the selected year
-  const [selectedTopic, setSelectedTopic] = useState(null); // Tracks the selected topic for learning
+  const [selectedYear, setSelectedYear] = useState(null);
+  const [selectedTopics, setSelectedTopics] = useState(null);
+  const [selectedTopic, setSelectedTopic] = useState(null);
+  const [selectedAssessment, setSelectedAssessment] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,27 +53,31 @@ const StartComponent = () => {
   };
 
   const handleYearSelect = (year, topics) => {
-    setSelectedYear(year); // Set the selected year
-    setSelectedTopics(topics); // Set topics for the selected year
-    setSelectedTopic(null); // Ensure no topic is selected yet
+    setSelectedYear(year);
+    setSelectedTopics(topics);
+    setSelectedTopic(null);
+    setSelectedAssessment(null);
   };
 
   const handleBackToYearsPage = () => {
-    setSelectedYear(null); // Reset year to go back to YearsPage
-    setSelectedTopics(null); // Reset topics when going back
-    setSelectedTopic(null); // Reset topic
+    setSelectedYear(null);
+    setSelectedTopics(null);
+    setSelectedTopic(null);
+    setSelectedAssessment(null);
   };
 
   const handleBackToTopics = () => {
-    setSelectedTopic(null); // Go back to YearTopicPage without resetting the year
+    setSelectedTopic(null);
+    setSelectedAssessment(null);
   };
 
   const handleLearn = (topic) => {
     setSelectedTopic({
       ...topic,
-      theories: topic.theories || [], // Ensure theories is an array
-      assessment: topic.assessment || '', // Default to empty string if no assessment
+      theories: topic.theories || [], 
+      assessments: topic.assessments || [], 
     });
+    setSelectedAssessment(null);
   };
 
   return (
@@ -121,22 +128,30 @@ const StartComponent = () => {
         {currentBoard === "moderator" && <BoardModerator />}
         {currentBoard === "user" && (
           <>
-            {selectedTopic ? (
+            {selectedAssessment ? (
+              <ErrorBoundary>
+                <AssessmentComponent
+                  assessment={selectedAssessment}
+                  onBackToTopics={handleBackToTopics}
+                  onBackToYears={handleBackToYearsPage}
+                />
+              </ErrorBoundary>
+            ) : selectedTopic ? (
               <LearnComponent
                 topic={selectedTopic}
-                year={selectedYear} // Ensure year is passed
-                onBackToTopics={handleBackToTopics} // Navigate back to YearTopicPage
-                onBackToYears={handleBackToYearsPage} // Navigate back to YearsPage
+                year={selectedYear}
+                onBackToTopics={handleBackToTopics}
+                onBackToYears={handleBackToYearsPage}
+                onAssessment={setSelectedAssessment}
+                currentUser={currentUser}
               />
-              
             ) : selectedYear ? (
               <YearTopicPage
                 year={selectedYear}
                 topics={selectedTopics}
-                onBack={handleBackToYearsPage} // Navigate back to YearsPage
+                onBack={handleBackToYearsPage}
                 onLearn={handleLearn}
               />
-              
             ) : (
               <YearsPage onYearSelect={handleYearSelect} />
             )}

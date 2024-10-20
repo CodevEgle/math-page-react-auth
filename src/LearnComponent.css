@@ -6,7 +6,7 @@
     padding: 20px;
     background-color: white;
     /*border: 1px solid #ccc;*/
-    border-radius: 8px;
+    border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
   }
@@ -29,21 +29,6 @@
   .learn-footer {
     text-align: right;
     margin-top: 20px;
-  }
-  
-  .next-button,
-  .assessment-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .next-button:hover,
-  .assessment-button:hover {
-    background-color: #0056b3;
   }
   
   .learn-back-button {
@@ -101,4 +86,66 @@
   .breadcrumb-item:hover {
     color: #f0b37e; /* Hover effect for clickable breadcrumb items */
   }
-  
+/* Styles for the "Pateikti" button with gradient and rounded corners */
+.submit-button {
+  background: linear-gradient(45deg, #007bff, #0056b3); /* Gradient from light to dark blue */
+  color: white;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 30px; /* Increased border radius for rounded effect */
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.submit-button:hover {
+  background: linear-gradient(45deg, #0056b3, #007bff); /* Inverted gradient for hover effect */
+}
+
+/* Styles for the "Next" button with gradient and rounded corners */
+.next-button,
+.assessment-button {
+  background: linear-gradient(45deg, #28a745, #218838); /* Gradient from light green to dark green */
+  color: white;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 30px; /* Increased border radius for rounded effect */
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.next-button:hover,
+.assessment-button:hover {
+  background: linear-gradient(45deg, #218838, #28a745); /* Inverted gradient for hover effect */
+}
+
+
+/* Styles for the numbered list of questions */
+.questions-list {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+.question-item {
+  margin-bottom: 20px;
+}
+
+/* Styles for the options */
+.options-container {
+  margin-top: 10px;
+}
+
+.option-item {
+  margin-bottom: 5px;
+}  
+/* Styles for the assessment title container */
+.assessment-title-container {
+  background-color: #f0f0f0;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}

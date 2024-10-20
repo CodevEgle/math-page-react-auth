@@ -45,9 +45,8 @@ function YearTopicPage({ year, topics, onBack, onLearn }) {
   // Start learning for the selected topic
   const handleStart = (selectedTopic) => {
     onLearn({
-      title: selectedTopic.title,
+      ...selectedTopic,
       theories: theories[selectedTopic.id] || [],  // Ensure theories are fetched
-      assessment: selectedTopic.assessment || '',  // Pass the assessment if available
     });
   };
 
@@ -91,6 +90,7 @@ function YearTopicPage({ year, topics, onBack, onLearn }) {
                     <li key={theory.id} className="subtopic-item">{theory.title}</li>
                   ))}
                 </ul>
+                
                 <button
                   className="learn-button"
                   onClick={() => handleStart(selectedTopic)}  // Call handleStart when the button is clicked

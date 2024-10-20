@@ -1,0 +1,71 @@
+import React, { useState, useEffect } from 'react';
+import YearsService from '../services/YearsService'; // Import the service for fetching data
+
+function AssessmentComponent({ assessment, onBackToTopics, onBackToYears }) {
+  const [questions, setQuestions] = useState([]); // State to hold the fetched questions
+  const [loading, setLoading] = useState(false); // State to manage the loading state
+  const [error, setError] = useState(null); // State to manage any error during fetch
+
+  useEffect(() => {
+    if (assessment) {
+      fetchAssessmentQuestions(); // Fetch questions when assessment is provided
+    }
+  }, [assessment]);
+
+  const fetchAssessmentQuestions = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await YearsService.getAssessmentQuestions(assessment.id);
+      setQuestions(response.data); // Set the questions state with fetched data
+    } catch (err) {
+      setError('Error fetching questions');
+      console.error('Error fetching questions:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="assessment-component">
+      <div className="breadcrumb">
+        <span onClick={onBackToYears} style={{ cursor: 'pointer' }}>KLASĖS</span> → 
+        <span onClick={onBackToTopics} style={{ cursor: 'pointer' }}>TOPIC</span> → 
+        <span>{assessment.title ? assessment.title.toUpperCase() : 'ASSESSMENT'}</span>
+      </div>
+
+      <h2>{assessment.title || 'Untitled Assessment'}</h2>
+
+      {loading ? (
+        <p>Loading questions...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        <div className="questions-container">
+          {questions.length === 0 ? (
+            <p>No questions available for this assessment.</p>
+          ) : (
+            <ul className="questions-list">
+              {questions.map((question) => (
+                <li key={question.id} className="question-item">
+                  <h4>{question.text}</h4>
+                  {question.options && (
+                    <ul className="options-list">
+                      {question.options.map((option, index) => (
+                        <li key={index} className="option-item">
+                          {option}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default AssessmentComponent;

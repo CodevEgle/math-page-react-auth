@@ -9,6 +9,7 @@ import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import StartComponent from "./components/StartComponent";
+import AssessmentComponent from './learn-components/AssessmentComponent';
 
 const App = () => {
     return (
@@ -25,6 +26,7 @@ const App = () => {
                     <Route path="/user" element={<BoardUser/>} />
                     <Route path="/mod" element={<BoardModerator/>} />
                     <Route path="/admin" element={<BoardAdmin/>} />
+                    <Route path="/assessment" element={<AssessmentComponent />} />
                 </Routes>
             </div>
         </Router>
