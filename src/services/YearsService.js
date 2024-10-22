@@ -8,6 +8,24 @@ class YearsService {
     return axios.get(API_URL, { headers: authHeader() });
   }
 
+  createYear(newYear){
+    return axios.post(`http://localhost:8080/api/years`, newYear, {
+      headers: authHeader(),
+    });
+  }
+  
+  deleteYear(id) {
+    return axios.delete(`http://localhost:8080/api/years/${id}`, {
+      headers: authHeader(),
+    });
+  }
+  
+  editYear(id, updatedYear) {
+    return axios.put(`http://localhost:8080/api/years/edit/${id}`, updatedYear, {
+      headers: authHeader(),
+    });
+  }
+
   getTheories(topicId) {
     return axios.get(`http://localhost:8080/api/topics/${topicId}/theories`, { headers: authHeader() });
   }
@@ -23,6 +41,10 @@ class YearsService {
 
   submitGrade(gradeDto) {
     return axios.post(`http://localhost:8080/api/grades/add`, gradeDto, { headers: authHeader() });
+  }
+  
+  getGrades(userId) {
+    return axios.get(`http://localhost:8080/api/grades/${userId}`, { headers: authHeader() });
   }
 }
 

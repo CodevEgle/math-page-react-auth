@@ -128,3 +128,15 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 8px 15px rgba(91, 134, 194, 0.3);
   }
+  .custom-alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+  }
+  
+  .custom-alert p {
+    margin: 0;
+  }

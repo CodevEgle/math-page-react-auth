@@ -42,7 +42,7 @@ function YearsPage({ onYearSelect }) {
       <div className="years-container">
         <h1 className="years-title">Klasės</h1>
         <p className="years-description">Sveiki prisijungę į matematikos svetainę.</p>
-        <p className="years-description">Galite peržiūrėti klasę ir temas, kurias norite mokytis.</p>
+        <p className="years-description">Pasirinkite klasę, kurios kursą norite mokytis.</p>
 
         {loading ? (
           <p className="loading-message">Loading years...</p>

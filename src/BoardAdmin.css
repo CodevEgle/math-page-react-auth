@@ -1,0 +1,58 @@
+/* BoardAdmin.css */
+
+.styled-button {
+    width: 200px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  /* Gradient and hover effect for the first button */
+  .styled-button:nth-of-type(1) {
+    background: linear-gradient(45deg, #3498db, #1abc9c); /* Blue to green gradient */
+  }
+  
+  .styled-button:nth-of-type(1):hover {
+    background: linear-gradient(45deg, #1abc9c, #3498db); /* Inverted gradient on hover */
+  }
+  
+  /* Gradient and hover effect for the second button */
+  .styled-button:nth-of-type(2) {
+    background: linear-gradient(45deg, #3498db, #1abc9c ); /*#f39c12, #e74c3c); */
+  }
+  
+  .styled-button:nth-of-type(2):hover {
+    background: linear-gradient(45deg, #1abc9c, #3498db); /* #e74c3c, #f39c12); */
+  }
+  
+  /* BoardAdmin.css */
+
+.users-table-wrapper {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .users-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto; /* Center align the table */
+  }
+  
+  .users-table th, .users-table td {
+    border: 1px solid #ddd; /* Table borders */
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .users-table th {
+    background-color: #f2f2f2;
+  }
+  

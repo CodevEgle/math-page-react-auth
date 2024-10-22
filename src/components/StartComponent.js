@@ -95,7 +95,7 @@ const StartComponent = () => {
           {showAdminBoardButton && (
             <li className="nav-item">
               <button className="btn-link" onClick={handleAdminBoardClick}>
-                Admin Board
+                Administratorius
               </button>
             </li>
           )}
@@ -103,7 +103,7 @@ const StartComponent = () => {
           {showModeratorBoardButton && (
             <li className="nav-item">
               <button className="btn-link" onClick={handleModeratorBoardClick}>
-                Moderator Board
+                Moderatorius
               </button>
             </li>
           )}

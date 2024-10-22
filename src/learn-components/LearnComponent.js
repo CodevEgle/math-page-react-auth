@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import YearsService from '../services/YearsService';
 import '../LearnComponent.css';
+import MathContent from './MathContent';
 
 function LearnComponent({ topic, year, onBackToTopics, onBackToYears, onAssessment, currentUser }) {
   const [currentTheoryIndex, setCurrentTheoryIndex] = useState(0);
@@ -9,12 +10,20 @@ function LearnComponent({ topic, year, onBackToTopics, onBackToYears, onAssessme
   const [error, setError] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [selectedAssessment, setSelectedAssessment] = useState(null);
+  const [completedAssessments, setCompletedAssessments] = useState([]);
+  const [resultMessage, setResultMessage] = useState("");
 
   const currentTheory = topic.theories[currentTheoryIndex];
 
   const handleNextTheory = () => {
     if (currentTheoryIndex < topic.theories.length - 1) {
       setCurrentTheoryIndex(currentTheoryIndex + 1);
+    }
+  };
+
+  const handlePreviousTheory = () => {
+    if (currentTheoryIndex > 0) {
+      setCurrentTheoryIndex(currentTheoryIndex - 1);
     }
   };
 
@@ -45,6 +54,14 @@ function LearnComponent({ topic, year, onBackToTopics, onBackToYears, onAssessme
   };
 
   const handleSubmit = async () => {
+    // Check if all questions have a selected answer
+    const allAnswered = questions.every(question => selectedAnswers.hasOwnProperty(question.id));
+
+    if (!allAnswered) {
+      alert("Prašome atsakyti į visus klausimus prieš pateikdami.");
+      return;
+    }
+
     let correctAnswersCount = 0;
 
     questions.forEach((question) => {
@@ -54,7 +71,11 @@ function LearnComponent({ topic, year, onBackToTopics, onBackToYears, onAssessme
     });
 
     const score = (correctAnswersCount / questions.length) * 10;
-    alert(`Atsakėte teisingai į ${correctAnswersCount} iš ${questions.length} klausimų. Jūsų pažymis - ${score.toFixed(2)}`);
+    const message = `Atsakėte teisingai į ${correctAnswersCount} iš ${questions.length} klausimų. Jūsų pažymis - ${score.toFixed(2)}`;
+
+    setResultMessage(message);
+    setCompletedAssessments([...completedAssessments, selectedAssessment.id]);
+    setSelectedAssessment(null);
 
     const gradeDto = {
       muserId: currentUser.id,
@@ -92,6 +113,12 @@ function LearnComponent({ topic, year, onBackToTopics, onBackToYears, onAssessme
         </span>
       </div>
 
+      {resultMessage && (
+        <div className="result-message">
+          <p>{resultMessage}</p>
+        </div>
+      )}
+
       {selectedAssessment && (
         <div className="assessment-title-container">
           <h4>{selectedAssessment.title}</h4>
@@ -99,10 +126,10 @@ function LearnComponent({ topic, year, onBackToTopics, onBackToYears, onAssessme
       )}
 
       <div className="learn-content">
-        {!selectedAssessment && (
+        {!selectedAssessment && !resultMessage && (
           <>
             <h3>{currentTheory.title}</h3>
-            <p>{currentTheory.content}</p>
+            <MathContent content={currentTheory.content} />
 
             {currentTheory.exampleExercises.length > 0 && (
               <div>
@@ -118,16 +145,33 @@ function LearnComponent({ topic, year, onBackToTopics, onBackToYears, onAssessme
         )}
 
         <div className="learn-footer">
-          {!selectedAssessment && currentTheoryIndex < topic.theories.length - 1 ? (
-            <button className="next-button" onClick={handleNextTheory}>
-              Next
-            </button>
-          ) : (
+          {!selectedAssessment && !resultMessage && (
             <>
-              {topic.assessments && topic.assessments.length > 0 && !selectedAssessment && (
-                <div>
-                  <h4>Choose an assessment:</h4>
-                  {topic.assessments.map((assessment) => (
+              {currentTheoryIndex > 0 && (
+                <button
+                  className="learn-back-button"
+                  onClick={handlePreviousTheory}
+                  style={{ marginRight: '20px' }}
+                >
+                  Atgal
+                </button>
+              )}
+              {currentTheoryIndex < topic.theories.length - 1 && (
+                <button
+                  className="next-button"
+                  onClick={handleNextTheory}
+                >
+                  Toliau
+                </button>
+              )}
+            </>
+          )}
+          {currentTheoryIndex >= topic.theories.length - 1 && (
+            topic.assessments && topic.assessments.length > 0 && !selectedAssessment && (
+              <div>
+                {topic.assessments
+                  .filter(assessment => !completedAssessments.includes(assessment.id))
+                  .map((assessment) => (
                     <button
                       key={assessment.id}
                       className="assessment-button"
@@ -136,9 +180,8 @@ function LearnComponent({ topic, year, onBackToTopics, onBackToYears, onAssessme
                       {assessment.title}
                     </button>
                   ))}
-                </div>
-              )}
-            </>
+              </div>
+            )
           )}
         </div>
 
@@ -146,12 +189,12 @@ function LearnComponent({ topic, year, onBackToTopics, onBackToYears, onAssessme
           <p>Loading questions...</p>
         ) : error ? (
           <p>{error}</p>
-        ) : questions.length > 0 && (
+        ) : questions.length > 0 && !resultMessage && (
           <div className="questions-container">
             <ul className="questions-list" style={{ listStyleType: 'none', paddingLeft: 0 }}>
               {questions.map((question, index) => (
                 <li key={question.id} className="question-item">
-                  <h5>{index + 1}. {question.question} (Points: {question.points})</h5>
+                  <h5>{index + 1}. <MathContent content={question.question} /> (Points: {question.points})</h5>
                   <div className="options-container">
                     {question.options.map((option, index) => (
                       <div key={index} className="option-item">
@@ -163,7 +206,7 @@ function LearnComponent({ topic, year, onBackToTopics, onBackToYears, onAssessme
                           checked={selectedAnswers[question.id] === option}
                           onChange={() => handleAnswerChange(question.id, option)}
                         />
-                        <label htmlFor={`option-${question.id}-${index}`}>{option}</label>
+                        <label htmlFor={`option-${question.id}-${index}`}><MathContent content={option}/></label>
                       </div>
                     ))}
                   </div>

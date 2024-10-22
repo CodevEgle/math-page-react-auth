@@ -29,23 +29,38 @@
   .learn-footer {
     text-align: right;
     margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* Space between the "Atgal" and "Next" buttons */
   }
   
-  .learn-back-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 10px 20px;
-    background-color: #f8f9fa;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .learn-back-button:hover {
-    background-color: #e2e6ea;
-  }
+  /* Updated styles for "Next" button */
+  /* Styles for the learn-footer buttons */
+.learn-footer {
+  text-align: right;
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px; /* Space between the "Atgal" and "Next" buttons */
+}
+
+/* Common styles for "Next" and "Atgal" buttons */
+.next-button, .learn-back-button {
+  padding: 10px 20px;
+  background: linear-gradient(45deg, #7baed4, #4b8bba); /* Gradient from light to dark blue */
+  color: white;
+  border: none;
+  border-radius: 30px; /* Increased border radius for rounded effect */
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for a 3D effect */
+}
+
+/* Hover effect for the buttons */
+.next-button:hover, .learn-back-button:hover {
+  background: linear-gradient(45deg,#4b8bba, #7baed4 ); /* Inverted gradient for hover effect */
+}
 
   .breadcrumb {
     font-family: 'Poppins', sans-serif;
@@ -100,13 +115,13 @@
 }
 
 .submit-button:hover {
-  background: linear-gradient(45deg, #0056b3, #007bff); /* Inverted gradient for hover effect */
+  background: linear-gradient(45deg, #0056b3, #057cfc); /* Inverted gradient for hover effect */
 }
 
 /* Styles for the "Next" button with gradient and rounded corners */
-.next-button,
+/*.next-button,*/
 .assessment-button {
-  background: linear-gradient(45deg, #28a745, #218838); /* Gradient from light green to dark green */
+  background: linear-gradient(45deg, #349ccc, #5d69d1); /* Gradient from light green to dark green */
   color: white;
   padding: 10px 20px;
   margin-top: 20px;
@@ -117,9 +132,9 @@
   transition: background 0.3s ease;
 }
 
-.next-button:hover,
+/*.next-button:hover,*/
 .assessment-button:hover {
-  background: linear-gradient(45deg, #218838, #28a745); /* Inverted gradient for hover effect */
+  background: linear-gradient(45deg, #5d69d1, #349ccc); /* Inverted gradient for hover effect */
 }
 
 
@@ -143,9 +158,9 @@
 }  
 /* Styles for the assessment title container */
 .assessment-title-container {
-  background-color: #f0f0f0;
+  background-color: #cde0f7;
   padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 30px;
   margin-top: 10px;
   margin-bottom: 20px;
 }

@@ -89,7 +89,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 40%; /* Topics užims 40% pločio */
+  width: 50%; /* Topics užims 40% pločio */
 }
 
 /* Topics sąrašas */
@@ -188,7 +188,7 @@
   padding: 15px 60px; /* Dvigubai padidintas mygtukas */
   font-size: 1.4em; /* Didesnis šriftas */
   font-weight: bold;
-  background: linear-gradient(135deg, #ff5722, #e64a19);
+  background: linear-gradient(135deg, #1a7edb, #9db7cf);
   color: white;
   border: none;
   border-radius: 50px 0 0 50px;
@@ -198,7 +198,8 @@
 }
 
 .learn-button:hover {
-  background: linear-gradient(135deg, #e64a19, #ff5722);
+  background: linear-gradient(135deg, #9db7cf, #1a7edb);
   transform: translateY(-2px);
+  transform: scale(1.1);
   box-shadow: 0 8px 15px rgba(255, 87, 34, 0.3);
 }
